@@ -21,5 +21,5 @@ public class ClientEntity extends PersonEntity {
     private String password;
 
     @Column
-    private String state;
+    private boolean state;
 }

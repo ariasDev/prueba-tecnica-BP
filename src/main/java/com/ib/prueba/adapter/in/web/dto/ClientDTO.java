@@ -17,5 +17,5 @@ public class ClientDTO {
     private String address;
     private String phoneNumber;
     private String password;
-    private String state;
+    private boolean state;
 }

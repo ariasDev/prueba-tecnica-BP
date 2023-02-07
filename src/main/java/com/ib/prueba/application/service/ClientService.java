@@ -29,7 +29,6 @@ public class ClientService implements ClientUseCase {
 
     @Override
     public Mono<ClientDTO> updateClient(ClientDTO clientDTO) {
-
         ClientEntity clientEntity = generateClientEntity(clientDTO);
         clientEntity.setId(clientDTO.getId());
 
@@ -50,7 +49,7 @@ public class ClientService implements ClientUseCase {
                         .address(clientEntity.getAddress())
                         .phoneNumber(clientEntity.getPhoneNumber())
                         .password(clientEntity.getPassword())
-                        .state(clientEntity.getState())
+                        .state(clientEntity.isState())
                         .build());
     }
 
@@ -69,7 +68,7 @@ public class ClientService implements ClientUseCase {
         clientEntity.setAddress(clientDTO.getAddress());
         clientEntity.setPhoneNumber(clientDTO.getPhoneNumber());
         clientEntity.setPassword(clientDTO.getPassword());
-        clientEntity.setState(clientDTO.getState());
+        clientEntity.setState(clientDTO.isState());
         return clientEntity;
     }
 }
