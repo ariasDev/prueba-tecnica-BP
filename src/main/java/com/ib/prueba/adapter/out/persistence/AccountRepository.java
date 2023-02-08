@@ -12,7 +12,7 @@ public class AccountRepository implements AccountPort {
     AccountCrudRepository accountCrudRepository;
 
     @Override
-    public AccountEntity savAccount(AccountEntity accountEntity) {
+    public AccountEntity saveAccount(AccountEntity accountEntity) {
         return accountCrudRepository.save(accountEntity);
     }
 
@@ -28,6 +28,6 @@ public class AccountRepository implements AccountPort {
 
     @Override
     public AccountEntity updateAccount(AccountEntity accountEntity) {
-        return savAccount(accountEntity);
+        return saveAccount(accountEntity);
     }
 }

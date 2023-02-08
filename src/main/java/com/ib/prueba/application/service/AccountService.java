@@ -16,7 +16,7 @@ public class AccountService implements AccountUseCase {
     @Override
     public AccountDTO savAccount(AccountDTO accountDTO) {
         AccountEntity accountEntity = generateAccountEntity(accountDTO);
-        AccountEntity accountEntitySaved = accountPort.savAccount(accountEntity);
+        AccountEntity accountEntitySaved = accountPort.saveAccount(accountEntity);
         accountDTO.setId(accountEntitySaved.getId());
         return accountDTO;
     }
@@ -37,14 +37,7 @@ public class AccountService implements AccountUseCase {
         if (accountEntity.getId().isEmpty()) {
             throw new Exception("item does not exist");
         } else {
-            return AccountDTO.builder()
-                    .id(accountEntity.getId())
-                    .accountNumber(accountEntity.getAccountNumber())
-                    .accountType(accountEntity.getAccountType())
-                    .initialBalance(accountEntity.getInitialBalance())
-                    .state(accountEntity.isState())
-                    .clientId(accountEntity.getClientId())
-                    .build();
+            return generateAccountDTO(accountEntity);
         }
 
     }
@@ -57,14 +50,7 @@ public class AccountService implements AccountUseCase {
         AccountEntity accountEntity = generateAccountEntity(accountDTO);
         accountEntity.setId(accountDTO.getId());
         AccountEntity accountEntityUpdated = accountPort.updateAccount(accountEntity);
-        return AccountDTO.builder()
-                .id(accountEntityUpdated.getId())
-                .accountNumber(accountEntityUpdated.getAccountNumber())
-                .accountType(accountEntityUpdated.getAccountType())
-                .initialBalance(accountEntityUpdated.getInitialBalance())
-                .state(accountEntityUpdated.isState())
-                .clientId(accountEntityUpdated.getClientId())
-                .build();
+        return generateAccountDTO(accountEntityUpdated);
     }
 
     private AccountEntity generateAccountEntity(AccountDTO accountDTO) {
@@ -76,4 +62,16 @@ public class AccountService implements AccountUseCase {
                 .clientId(accountDTO.getClientId())
                 .build();
     }
+
+    private AccountDTO generateAccountDTO(AccountEntity accountEntity) {
+        return AccountDTO.builder()
+                .accountNumber(accountEntity.getAccountNumber())
+                .accountType(accountEntity.getAccountType())
+                .initialBalance(accountEntity.getInitialBalance())
+                .state(accountEntity.isState())
+                .clientId(accountEntity.getClientId())
+                .build();
+    }
+
+
 }

@@ -4,7 +4,7 @@ import com.ib.prueba.domain.AccountEntity;
 
 public interface AccountPort {
 
-    AccountEntity savAccount(AccountEntity accountEntity);
+    AccountEntity saveAccount(AccountEntity accountEntity);
 
     void deleteAccount(String id);
 
